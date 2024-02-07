@@ -27,31 +27,33 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginValidEmailPassword(){
-        //Pre-conditions
+        // Pre-condition
+        // Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
-        //Declaration
+
         WebDriver driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        // Step 1 : Open Browser
-        String url = "http://qa.koel.app/";
+
+        // Steps
+        String url = "https://qa.koel.app/";
         driver.get(url);
-        //Step 2: Enter email
+
         WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
         emailField.clear();
         emailField.sendKeys("demo@class.com");
 
-        // Step 3: Enter Password
         WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
         passwordField.clear();
         passwordField.sendKeys("te$t$tudent");
 
-        //Step $: Click on login Button
-        WebElement loginBtn = driver.findElement(By.cssSelector("button[type='submit']"));
-        loginBtn.click();
-        //Assertion
-        WebElement avatarIcon =  driver.findElement(By.cssSelector("img[class='avatar]"));
+        WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
+        submit.click();
+
+        WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        // Expected Result
         Assert.assertTrue(avatarIcon.isDisplayed());
+
         driver.quit();
 
     }
