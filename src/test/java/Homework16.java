@@ -23,11 +23,13 @@ public class Homework16 extends BaseTest {
         String url = "https://qa.koel.app/";
         driver.get(url);
         Thread.sleep(5000);
-        WebElement registrationField = driver.findElement(By.cssSelector("#app > div > div > form > div:nth-child(5) > a"));
-        registrationField.click();
+        WebElement registrationLink = driver.findElement(By.cssSelector("#app > div > div > form > div:nth-child(5) > a"));
+        registrationLink.click();
 
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        Assert.assertTrue(emailField.isDisplayed());
+        String registrationUrl = "https://qa.koel.app/registration";
+        Assert.assertEquals(driver.getCurrentUrl(),registrationUrl);
+
+
         driver.quit();
 
 
