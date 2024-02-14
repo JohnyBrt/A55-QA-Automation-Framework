@@ -16,7 +16,7 @@ public void changeProfileName() throws InterruptedException {
     clickSubmit();
     Thread.sleep(2000);
     // click on avatar icon
-    clickAvatarIcon();  
+    clickAvatarIcon();
         Thread.sleep(2000);
     // create username
     String randomName = generateRandomName();
