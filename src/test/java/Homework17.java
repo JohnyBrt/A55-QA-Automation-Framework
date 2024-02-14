@@ -71,7 +71,7 @@ import org.testng.annotations.Test;
         }
 
         public String getAddToPlaylistSuccessMsg() {
-            WebElement notification = driver.findElement(By.cssSelector("div.success"));
+            WebElement notification = driver.findElement(By.cssSelector("div.success."));
             return notification.getText();
 
         }

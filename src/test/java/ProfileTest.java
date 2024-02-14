@@ -11,18 +11,18 @@ public void changeProfileName() throws InterruptedException {
     // navigate to page
     navigateToPage();
     // login with correct credentials
-    provideEmail("demo@class.com");
-    providePassword("te$t$tudent");
+    provideEmail("ionut.burtoiu@testpro.io");
+    providePassword("Luca@20222");
     clickSubmit();
     Thread.sleep(2000);
     // click on avatar icon
-    clickAvatarIcon();
+    clickAvatarIcon();  
         Thread.sleep(2000);
     // create username
     String randomName = generateRandomName();
 
     // provide current password
-    provideCurrentPassword("te$t$tudent");
+    provideCurrentPassword("Luca@20222");
         Thread.sleep(2000);
 
     // provide new profile name

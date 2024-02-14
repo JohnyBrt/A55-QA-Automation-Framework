@@ -19,8 +19,8 @@ public class LoginTests extends BaseTest {
     @Test
     public void loginValidEmailPassword() throws InterruptedException {
         navigateToPage();
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
+        provideEmail("ionut.burtoiu@testpro.io");
+        providePassword("Luca@20222");
         clickSubmit();
 
         Thread.sleep(2000);
@@ -53,7 +53,7 @@ public class LoginTests extends BaseTest {
     public void loginValidEmailEmptyPassword() throws InterruptedException {
         navigateToPage();
         provideEmail("demo@class.com");
-        providePassword(null);
+        providePassword("");
         clickSubmit();
         Thread.sleep(2000);
         //Assertions (Expected vs actual)
