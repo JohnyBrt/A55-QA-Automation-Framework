@@ -3,13 +3,13 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Homework17 extends BaseTest{
+
 
     public class Homework17 extends BaseTest {
         @Test
         //addSongToPlaylist
         public void addSongToPlaylist() throws InterruptedException {
-            String expectedSongAddedSuccessMsq = "Added 1 song into \"test.\"";
+            String expectedSongAddedSuccessMsq = "Added 1 song into \"1b.\"";
 
 
             //navigate to koel
@@ -19,31 +19,30 @@ public class Homework17 extends BaseTest{
             providePassword("Luca@20222");
             clickSubmit();
 
-
             //search for a song
             searchForSong("Episode 2");
-            Thread.sleep(5000);
+            Thread.sleep(2000);
 
             //click "View All" button
             viewAllButton();
-            Thread.sleep(5000);
+            Thread.sleep(2000);
 
             //click on the song
             clickOnTheSong();
-            Thread.sleep(5000);
+            Thread.sleep(2000);
 
             //click on "ADD TO'
             clickAddTo();
-            Thread.sleep(5000);
+            Thread.sleep(2000);
 
 
             //Choose the playlist
             choosePlaylist();
-            Thread.sleep(5000);
+            Thread.sleep(2000);
 
             //Assertions
-            Assert.assertEquals(getSongAddedSuccessMsg(), expectedSongAddedSuccessMsq);
-            Thread.sleep(5000);
+            Assert.assertEquals(getAddToPlaylistSuccessMsg(), expectedSongAddedSuccessMsq);
+            Thread.sleep(2000);
         }
 
         public void searchForSong(String songName) {
@@ -63,21 +62,19 @@ public class Homework17 extends BaseTest{
 
 
         public void clickAddTo() {
-            WebElement addTo = driver.findElement(By.cssSelector("button.btn-add-to"));
-            addTo.click();
+            WebElement addToBtn = driver.findElement(By.cssSelector("button.btn-add-to"));
+            addToBtn.click();
         }
         public void choosePlaylist() {
-            WebElement choosePlst = driver.findElement(By.cssSelector("#playlists > ul > li:nth-child(3)"));
+            WebElement choosePlst = driver.findElement(By.xpath("//*[@id='songResultsWrapper']//li[contains(text(),'1b')]"));
             choosePlst.click();
         }
 
-        public String getSongAddedSuccessMsg() {
-            WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
+        public String getAddToPlaylistSuccessMsg() {
+            WebElement notification = driver.findElement(By.cssSelector("div.success"));
             return notification.getText();
 
         }
     }
 
 
-
-}
