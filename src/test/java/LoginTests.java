@@ -10,19 +10,18 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
     @Test
-    public void loginEmptyEmailPassword()  {
+    public void loginEmptyEmailPassword() {
         //navigateToPage();
-        //gradle clinAssert.assertEquals(driver.getCurrentUrl(), url);
+        //gradle clickAssert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
     }
 
     @Test
-    public void loginValidEmailPassword()  {
+    public void loginValidEmailPassword() {
         // navigateToPage();
         provideEmail("ionut.burtoiu@testpro.io");
         providePassword("Luca@20222");
         clickSubmit();
-
 
 
         WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
@@ -40,7 +39,6 @@ public class LoginTests extends BaseTest {
         providePassword(password);
         clickSubmit();
 
-
         WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
         // Expected Result
         Assert.assertTrue(avatarIcon.isDisplayed());
@@ -48,7 +46,7 @@ public class LoginTests extends BaseTest {
         driver.quit();
     }
 
-        @Test
+      @Test
         public void loginInvalidEmailValidPassword() {
             //navigateToPage();
             provideEmail("invalid@class.com");
