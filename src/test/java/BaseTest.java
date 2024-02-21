@@ -4,23 +4,38 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
 public class BaseTest {
     public WebDriver driver = null;
 
-    public String url = "http://qa.koel.app/";
+   // public String url = "http://qa.koel.app/";
+
+    //Data Providers Start
+   @DataProvider(name="invalidLoginData")
+    public Object[][] getDataFromDataProviders(){
+        return new Object[][]{
+                {"invalid@email.com","invalidPassword"},
+                {"ionut.burtoiu@testpro.io",""},
+                {"",""},
+                {"invalid@email.com","Luca@20222"}
+        };
+    }
+
+
+
+    //Data Providers Ends
 
     @BeforeSuite
     static void setupClass() {
         WebDriverManager.chromedriver().setup();
     }
+
     @BeforeMethod
-    public void lunchBrowser(){
+    @Parameters({"BaseURL"})
+    public void lunchBrowser(String baseURL){
         // Added ChromeOptions argument below to fix websocket error
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -28,6 +43,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+        navigateToPage(baseURL);
 
     }
     @AfterMethod
@@ -53,7 +69,7 @@ public class BaseTest {
        emailField.sendKeys(email);
     }
 
-    public void navigateToPage() {
+    public void navigateToPage(String url) {
         driver.get(url);
 
 

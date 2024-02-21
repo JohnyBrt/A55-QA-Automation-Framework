@@ -9,7 +9,7 @@ public class ProfileTest extends BaseTest{
     @Test
 public void changeProfileName() throws InterruptedException {
     // navigate to page
-    navigateToPage();
+    //navigateToPage();
     // login with correct credentials
     provideEmail("ionut.burtoiu@testpro.io");
     providePassword("Luca@20222");

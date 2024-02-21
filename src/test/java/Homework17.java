@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 
             //navigate to koel
-            navigateToPage();
+           // navigateToPage();
             // login with valid credentials
             provideEmail("ionut.burtoiu@testpro.io");
             providePassword("Luca@20222");

@@ -9,7 +9,7 @@ public class Homework18 extends BaseTest{
     public void playSong() throws InterruptedException {
 
         //navigate
-        navigateToPage();
+        //navigateToPage();
         //login valid credantials
         provideEmail("ionut.burtoiu@testpro.io");
         providePassword("Luca@20222");
