@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class Homework19 extends BaseTest {
     @Test
     public void deletePlaylist() throws InterruptedException {
-        String expectedSongAddedSuccessMsg = "Deleted Playlist \"HW19.\"";
+        String expectedSongAddedSuccessMsg = "Deleted playlist \"HW19.\"";
         //navigate
 
         provideEmail("ionut.burtoiu@testpro.io");
@@ -27,6 +27,7 @@ public class Homework19 extends BaseTest {
 
     public void clickToDeletePlaylist() {
         WebElement deletePlaylist = driver.findElement(By.xpath("//div/span/button[ @title= 'Delete this playlist']"));
+        deletePlaylist.click();
     }
 
     public void clickOnPlaylist() {
