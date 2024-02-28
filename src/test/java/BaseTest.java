@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
@@ -14,6 +15,8 @@ public class BaseTest {
     public WebDriver driver = null;
 
     public WebDriverWait wait;
+
+    public Actions actions;
 
    // public String url = "http://qa.koel.app/";
 
@@ -50,6 +53,7 @@ public class BaseTest {
         //Explicit Wait
         wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         driver.manage().window().maximize();
+        actions = new Actions(driver);
         navigateToPage(baseURL);
 
     }
@@ -81,10 +85,11 @@ public class BaseTest {
 
     public void navigateToPage(String url) {
         driver.get(url);
+    }
 
-
-
+        public void chooseAllSongsList() {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='songs'] "))).click();
+        }
 
 
     }
-}
