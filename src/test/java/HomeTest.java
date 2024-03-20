@@ -91,7 +91,7 @@ public String getRenamePlaylistSuccessMsg(){
 
     public void choosePlaylistByName(String playListName) {
         wait.until(ExpectedConditions
-                .visibilityOfElementLocated(By.xpath("//a[contains(text(),'"+playListName+"')]"))).click();
+                .visibilityOfElementLocated(By.xpath("//a[contains(text(),'" + playListName + "')]"))).click();
     }
 
 
