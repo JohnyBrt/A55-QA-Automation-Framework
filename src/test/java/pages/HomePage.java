@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage{
     String newPlaylistName1 = "Test22";
@@ -16,9 +17,11 @@ public class HomePage extends BasePage{
     By firstPlaylist = By.cssSelector(".playlist:nth-child(3)");
     By playlistNameField = By.cssSelector("name='name'");
     By renamePlaylistSuccessMsg = By.cssSelector("div.success.show");
+    By allSongsList = By.xpath("//a[@class='songs']");
     //Helper Method
 
     public WebElement getUserAvatar(){
+
         return findElement(userAvatarIcon);
     }
 public void doubleClickPlaylist(){
@@ -33,4 +36,7 @@ public void enterNewName(String playlistName ){
         return findElement(renamePlaylistSuccessMsg).getText();
 
  }
+    public void chooseAllSongsList() {
+        findElement(allSongsList).click();
+    }
 }

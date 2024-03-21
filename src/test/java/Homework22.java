@@ -13,7 +13,7 @@ public class Homework22 extends BaseTest{
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
-        loginPage.login();
+        loginPage.loginToKoelApp();
         homePage.doubleClickPlaylist();
         homePage.enterNewName(newPlaylistName);
         Assert.assertEquals(homePage.getRenamePlaylistSuccessMsg(),updatedPlaylistMsg);
