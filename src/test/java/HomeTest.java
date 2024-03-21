@@ -68,7 +68,7 @@ public String getRenamePlaylistSuccessMsg(){
     }
 
     public void doubleClickPlaylist() {
-        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'HW19')]")));
+        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'1b')]")));
         actions.doubleClick(playlistElement).perform();
 
     }

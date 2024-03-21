@@ -17,9 +17,11 @@ public class LoginPage extends BasePage{
     //Helper Methods
 
     public void provideEmail(String email){
+
         findElement(emailField).sendKeys(email);
     }
     public void providePassword(String password){
+
         findElement(passwordField).sendKeys(password);
     }
     public void  clickSubmit(){
