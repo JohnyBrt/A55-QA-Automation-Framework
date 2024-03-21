@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 import java.time.Duration;
 
@@ -81,7 +83,17 @@ public class LoginTests extends BaseTest {
 
 
         }
+       //Login with valid email Test using the Page Object Model
+    @Test
+       public void loginValidEmailValidPasswordTest(){
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
 
+        loginPage.provideEmail("ionut.burtoiu@testpro.io");
+        loginPage.providePassword("Luca@20222");
+        loginPage.clickSubmit();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+       }
 
     }
 
