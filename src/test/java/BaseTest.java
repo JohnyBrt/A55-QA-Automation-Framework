@@ -13,12 +13,15 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.time.Duration;
+import java.util.HashMap;
 
 public class BaseTest {
     public WebDriver driver = null;
@@ -27,10 +30,16 @@ public class BaseTest {
 
     public Actions actions;
 
+    public static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
+
+    public static WebDriver getDriver(){
+        return threadDriver.get();
+    }
+
    // public String url = "http://qa.koel.app/";
 
     //Data Providers Start
-   @DataProvider(name="invalidLoginData")
+ /* @DataProvider(name="invalidLoginData")
     public Object[][] getDataFromDataProviders(){
         return new Object[][]{
                 {"invalid@email.com","invalidPassword"},
@@ -38,7 +47,7 @@ public class BaseTest {
                 {"",""},
                 {"invalid@email.com","Luca@20222"}
         };
-    }
+    }*/
 
 
 
@@ -55,20 +64,27 @@ public class BaseTest {
     @Parameters({"BaseURL"})
     public void lunchBrowser(String baseURL) throws MalformedURLException {
         // Added ChromeOptions argument below to fix websocket error
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        //ChromeOptions options = new ChromeOptions();
+        //options.addArguments("--remote-allow-origins=*");
 
        //driver = new ChromeDriver(options);
         //driver = new FirefoxDriver();
         //driver = new SafariDriver();
-        driver = pickBrowser(System.getProperty("browser"));
+        threadDriver.set(pickBrowser(System.getProperty("browser")));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+       // driver = pickBrowser(System.getProperty("browser"));
         System.out.println();
         //Implicit Wait
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        //getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+       // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         //Explicit Wait
-        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        driver.manage().window().maximize();
-        actions = new Actions(driver);
+        //wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait = new WebDriverWait(getDriver(),Duration.ofSeconds(10));
+
+        //driver.manage().window().maximize();
+        getDriver().manage().window().maximize();
+       // actions = new Actions(driver);
+        actions = new Actions(getDriver());
         navigateToPage(baseURL);
 
     }
@@ -100,6 +116,8 @@ public class BaseTest {
            case "grid-safari":
                caps.setCapability("browserName","safari");
                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
+           case "cloud":
+               return lambdaTest();
            default:
                WebDriverManager.chromedriver().setup();
                ChromeOptions chromeOptions = new ChromeOptions();
@@ -110,11 +128,33 @@ public class BaseTest {
 
 
     }
+public WebDriver lambdaTest() throws MalformedURLException {
+    String hubUrl = "https://hub.lambdatest.com/wd/hub";
 
-    @AfterMethod
+
+    DesiredCapabilities capabilities = new DesiredCapabilities();
+    ChromeOptions browserOptions = new ChromeOptions();
+    browserOptions.setPlatformName("Windows 10");
+    browserOptions.setBrowserVersion("123.0");
+    HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+    ltOptions.put("username", "burtoiuionut89");
+    ltOptions.put("accessKey", "2SM3oa4HOewKNvpqpVge9k0PEsyoNDklrhaFeR7Fd1URaZRich");
+    ltOptions.put("project", "Untitled");
+    ltOptions.put("selenium_version", "4.0.0");
+    ltOptions.put("w3c", true);
+    browserOptions.setCapability("LT:Options", ltOptions);
+  return new RemoteWebDriver(new URL(hubUrl),capabilities);
+}
+    /*@AfterMethod
     public void closeBrowser(){
         driver.quit();
 
+    }*/
+    @AfterMethod
+
+    public void tearDown(){
+        threadDriver.get().close();
+        threadDriver.remove();
     }
 
     public void clickSubmit() {
@@ -138,7 +178,8 @@ public class BaseTest {
     }
 
     public void navigateToPage(String url) {
-        driver.get(url);
+        //driver.get(url);
+        getDriver().get(url);
     }
 
         public void chooseAllSongsList() {

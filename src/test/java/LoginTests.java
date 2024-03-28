@@ -52,49 +52,74 @@ public class LoginTests extends BaseTest {
         driver.quit();
     }
 
-      @Test
-        public void loginInvalidEmailValidPassword() {
-            //navigateToPage();
-            provideEmail("invalid@class.com");
-            providePassword("te$tStudent");
-            clickSubmit();
+   /* @Test
+    public void loginInvalidEmailValidPassword() {
+        //navigateToPage();
+        provideEmail("invalid@class.com");
+        providePassword("te$tStudent");
+        clickSubmit();
 
 
-           // WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
-          WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
-            // Expected Result
-            Assert.assertTrue(avatarIcon.isDisplayed());
+        // WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
+        // Expected Result
+        Assert.assertTrue(avatarIcon.isDisplayed());
 
-            driver.quit();
-        }
+        driver.quit();
+    }*/
 
-        @Test
-        public void loginValidEmailEmptyPassword () {
-            //navigateToPage();
-            provideEmail("ionut.burtoiu@testpro.io");
-            providePassword("");
-            clickSubmit();
+   /* @Test
+    public void loginValidEmailEmptyPassword() {
+        //navigateToPage();
+        provideEmail("ionut.burtoiu@testpro.io");
+        providePassword("");
+        clickSubmit();
 
-            //Assertions (Expected vs actual)
-            //WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
-            WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
-            Assert.assertTrue(avatarIcon.isDisplayed());
-            driver.quit();
+        //Assertions (Expected vs actual)
+        //WebElement avatarIcon = driver.findElement(By.cssSelector("img[class='avatar']"));
+        WebElement avatarIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
+        Assert.assertTrue(avatarIcon.isDisplayed());
+        driver.quit();
 
 
-        }
-       //Login with valid email Test using the Page Object Model
+    }*/
+
+    //Login with valid email Test using the Page Object Model
     @Test
-       public void loginValidEmailValidPasswordTest(){
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+    public void loginValidEmailValidPasswordTest() {
+        //LoginPage loginPage = new LoginPage(driver);
+        //HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+
 
         loginPage.provideEmail("ionut.burtoiu@testpro.io");
         loginPage.providePassword("Luca@20222");
         loginPage.clickSubmit();
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-       }
-
     }
 
+    @Test
+    public void loginInValidEmailValidPasswordTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+
+
+        loginPage.provideEmail("ionutburtoiu@testpro.io");
+        loginPage.providePassword("Luca@20222");
+        loginPage.clickSubmit();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+    @Test
+    public void loginEmptyEmailPasswordTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+
+
+        loginPage.provideEmail("");
+        loginPage.providePassword("");
+        loginPage.clickSubmit();
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+}
 
