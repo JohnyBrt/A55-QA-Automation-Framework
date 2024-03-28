@@ -143,7 +143,7 @@ public WebDriver lambdaTest() throws MalformedURLException {
     ltOptions.put("selenium_version", "4.0.0");
     ltOptions.put("w3c", true);
     browserOptions.setCapability("LT:Options", ltOptions);
-  return new RemoteWebDriver(new URL(hubUrl),capabilities);
+     return new RemoteWebDriver(new URL(hubUrl),capabilities);
 }
     /*@AfterMethod
     public void closeBrowser(){
