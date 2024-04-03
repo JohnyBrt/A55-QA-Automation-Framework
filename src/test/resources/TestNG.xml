@@ -13,7 +13,7 @@
                <include name="loginEmptyEmailPasswordTest"></include>
            </methods>
            </class>
-
+            <class name="BaseTest"/>
 
         </classes>
     </test>

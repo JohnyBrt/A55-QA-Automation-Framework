@@ -75,7 +75,7 @@ public class BaseTest {
        // driver = pickBrowser(System.getProperty("browser"));
         System.out.println();
         //Implicit Wait
-        //getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
        // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         //Explicit Wait
         //wait = new WebDriverWait(driver,Duration.ofSeconds(10));
